@@ -1,3 +1,7 @@
+# The game.py script is a Python demo built with the Ursina game engine that visually illustrates 3D object sorting based on camera distance. It sets up a simple 3D scene with a stationary gray wall and multiple "soldiers" placed at varying depths along the Z-axis. 
+# As the soldiers move forward toward the camera, the script continuously calculates and prints their sorted order based on true Euclidean distance — not just Z-values — to simulate how game engines like Call of Duty determine which objects to render first (back-to-front).
+#  The camera is placed behind the scene and slightly elevated to give a clear view, and an EditorCamera allows the user to orbit and inspect the scene. This project is ideal for demonstrating why dynamic render order is critical for transparent object handling in 3D graphics.
+
 from ursina import *
 from random import uniform
 
