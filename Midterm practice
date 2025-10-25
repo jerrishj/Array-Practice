@@ -1,0 +1,84 @@
+1) Write a method AddF that adds a new element to the front of the list.
+
+public void AddF(T data) {
+    first = new Cell(data, first);
+}
+
+2) Write a method AddL that adds an element to the end of the list.
+
+public void AddL(T data) {
+    Cell newCell = new Cell(data, null);
+    if (first == null) first = newCell;
+    else {
+        Cell current = first;
+        while (current.Next != null)
+            current = current.Next;
+        current.Next = newCell;
+    }
+}
+
+3) Write a method RemoveF() to remove the first node.
+
+public void RemoveF() {
+    if (first != null)
+        first = first.Next;
+}
+
+4) Write a method Count() that returns the number of nodes.
+
+public int Count() {
+    int counter = 0;
+    Cell current = first;
+    while (current != null) {
+        counter++;
+        current = current.Next;
+    }
+    return counter;
+}
+
+
+5) Write an AddF and AddL for a doubly linked list.
+
+public void AddF(T data) {
+    Cell newCell = new Cell(data);
+    newCell.Next = first;
+    if (first != null) first.Prev = newCell;
+    first = newCell;
+    if (tail == null) tail = newCell;
+}
+
+public void AddL(T data) {
+    Cell newCell = new Cell(data);
+    newCell.Prev = tail;
+    if (tail != null) tail.Next = newCell;
+    tail = newCell;
+    if (first == null) first = newCell;
+}
+
+6) Write a recursive inorder traversal
+
+public void InOrder(Node node) {
+    if (node != null) {
+        InOrder(node.Left);
+        Console.Write(node.Data + " ");
+        InOrder(node.Right);
+    }
+
+
+7)   Write a method named Contains(T data) for a linked list class. The method should return true if the list contains the given data, and false otherwise. 
+
+public bool Contains(T data)
+{
+    Cell current = first;
+    while (current != null)
+    {
+        if (current.Data.Equals(data))
+        {
+            return true;
+        }
+        current = current.Next;
+    }
+    return false;
+}
+
+
