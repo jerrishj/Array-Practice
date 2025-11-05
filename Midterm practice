@@ -121,3 +121,32 @@ public bool Contains(T data)
         first = prev;
     }
 
+10) splitting and returning front and back halves of linked list
+
+public (Cell<T> Front, Cell<T> Back) FrontBackSplit()
+{
+
+    if (first == null)
+        return (null, null);
+    if (first.Next == null)
+        return (first, null);
+
+    Cell<T> slow = first;
+    Cell<T> fast = first.Next;
+
+    {
+        fast = fast.Next;
+        if (fast != null)
+        {
+            slow = slow.Next;
+            fast = fast.Next;
+        }
+    }
+
+    Cell<T> front = first;
+    Cell<T> back = slow.Next;
+    slow.Next = null; 
+
+    return (front, back);
+}
+
