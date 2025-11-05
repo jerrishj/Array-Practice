@@ -134,6 +134,7 @@ public (Cell<T> Front, Cell<T> Back) FrontBackSplit()
     Cell<T> slow = first;
     Cell<T> fast = first.Next;
 
+    While (fast != null)
     {
         fast = fast.Next;
         if (fast != null)
