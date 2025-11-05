@@ -81,4 +81,43 @@ public bool Contains(T data)
     return false;
 }
 
+8) InsertNth to linked list
+
+    public void InsertNth(int index, T data)
+    {
+        if (index < 0 || index > Count())
+            throw new ArgumentOutOfRangeException(nameof(index));
+
+        if (index == 0)
+        {
+            AddF(data);
+            return;
+        }
+        
+        Cell<T> current = first;
+        for (int i = 0; i < index - 1; i++)
+            current = current.Next;
+        
+        Cell<T> newCell = new Cell<T>(data, current.Next);
+        current.Next = newCell;
+    }
+
+9) reverse linked list
+
+    public void Reverse()
+    {
+        Cell<T> prev = null;
+        Cell<T> current = first;
+        Cell<T> next = null;
+
+        while (current != null)
+        {
+            next = current.Next;
+            current.Next = prev;
+            prev = current;
+            current = next;
+        }
+
+        first = prev;
+    }
 
