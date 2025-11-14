@@ -155,13 +155,13 @@ public (Cell<T> Front, Cell<T> Back) FrontBackSplit()
 
 static void Print<T>(string label, SinglyLinkedList<T> list, SinglyLinkedList<T>.Cell headOverride = null)
 {
-    var cur = headOverride ?? list.Head; // expose Head or add a ToDebugString helper
+    var cur = headOverride ?? list.Head; 
     var parts = new List<string>();
     while (cur != null) { parts.Add(cur.Data?.ToString()); cur = cur.Next; }
     Console.WriteLine($"{label} [{string.Join(" -> ", parts)}]");
 }
 
-// Example use (you decide expected results):
+
 var ex1 = new SinglyLinkedList<int>();
 foreach (var v in new[] {10,20,30,40}) ex1.AddL(v);
 Print("start", ex1);
