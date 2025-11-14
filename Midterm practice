@@ -151,34 +151,81 @@ public (Cell<T> Front, Cell<T> Back) FrontBackSplit()
     return (front, back);
 }
 
-11) Main() method
 
-static void Print<T>(string label, SinglyLinkedList<T> list, SinglyLinkedList<T>.Cell headOverride = null)
+11) remove duplicates from linked list
+
+public void RemoveDuplicates()
 {
-    var cur = headOverride ?? list.Head; 
-    var parts = new List<string>();
-    while (cur != null) { parts.Add(cur.Data?.ToString()); cur = cur.Next; }
-    Console.WriteLine($"{label} [{string.Join(" -> ", parts)}]");
+    if (first == null) return;
+
+    var current = first;
+
+    while (current.Next != null)
+    {
+        if (current.Data.Equals(current.Next.Data))
+        {
+            
+            current.Next = current.Next.Next;
+        }
+        else
+        {
+            current = current.Next;
+        }
+    }
+}
+
+12) Move first node from one list and inserts it at the front of another list
+
+public static void MoveNode(ref Cell<T> dest, ref Cell<T> source)
+{
+    if (source == null)
+        throw new InvalidOperationException("Source list is empty.");
+
+
+    Cell<T> node = source;
+    source = source.Next;
+
+    node.Next = dest;
+    dest = node;
 }
 
 
-var ex1 = new SinglyLinkedList<int>();
-foreach (var v in new[] {10,20,30,40}) ex1.AddL(v);
-Print("start", ex1);
-ex1.InsertNth(0, 5);
-ex1.InsertNth(3, 25);
-ex1.InsertNth(ex1.Count(), 50);
-Print("after ex1", ex1);
+13) Splitting list into 2 by alternating nodes
 
-var ex2 = new SinglyLinkedList<int>();
-foreach (var v in new[] {1,2,3,4}) ex2.AddL(v);
-Print("start", ex2);
-ex2.Reverse();
-Print("after reverse", ex2);
+public (Cell<T> A, Cell<T> B) AlternatingSplit()
+{
+    if (first == null)
+        return (null, null);
 
-var ex3 = new SinglyLinkedList<int>();
-foreach (var v in new[] {1,2,3,4,5}) ex3.AddL(v);
-Print("start", ex3);
-var (front, back) = ex3.FrontBackSplit();
-Print("front", ex3, front);
-Print("back", ex3, back);
+    Cell<T> A = null;
+    Cell<T> B = null;
+
+    Cell<T> current = first;
+    bool toA = true;
+
+    while (current != null)
+    {
+        Cell<T> next = current.Next; 
+        current.Next = null;        
+        if (toA)
+        {
+
+            current.Next = A;
+            A = current;
+        }
+        else
+        {
+            current.Next = B;
+            B = current;
+        }
+
+        toA = !toA; 
+        current = next;
+    }
+
+
+    A = ReverseList(A);
+    B = ReverseList(B);
+
+    return (A, B);
+}
